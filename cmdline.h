@@ -414,13 +414,13 @@ public:
   }
 
   bool parse(const std::vector<std::string> &args){
-    int argc=static_cast<int>(args.size());
+    unsigned argc=static_cast<unsigned>(args.size());
     std::vector<const char*> argv(argc);
 
-    for (int i=0; i<argc; i++)
+    for (unsigned i=0; i<argc; i++)
       argv[i]=args[i].c_str();
 
-    return parse(argc, &argv[0]);
+    return parse(static_cast<int>(argc), &argv[0]);
   }
 
   bool parse(int argc, const char * const argv[]){
@@ -533,7 +533,7 @@ public:
   void parse_check(const std::vector<std::string> &args){
     if (!options.count("help"))
       add("help", '?', "print this message");
-    check(args.size(), parse(args));
+    check(static_cast<int>(args.size()), parse(args));
   }
 
   void parse_check(int argc, char *argv[]){
